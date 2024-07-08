@@ -17,4 +17,6 @@ public class Kat {
 
     @OneToMany
     private List<Ofis> ofisler;
+
+
 }

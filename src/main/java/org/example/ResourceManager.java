@@ -8,12 +8,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class ResourceManager{
 
+
+    @Autowired
+    private KatRepository katRepository;
+
     @Autowired
     private OfisDao ofisDao;
+    @Autowired
+    private KatDao katDao;
 
     @GetMapping("/home")
     public Ofis[] home(){
@@ -30,8 +38,26 @@ public class ResourceManager{
 
     @GetMapping("/ofisEkle")
     public Ofis[] ofisEkle(@RequestParam(value = "metrekare") Double metrekare,
-                           @RequestParam(value = "kiraCarpani",defaultValue = "1.0") Double kiraCarpani)
+                           @RequestParam(value = "kiraCarpani",defaultValue = "1.0") Double kiraCarpani,
+                           @RequestParam (value = "kat") int kat)
     {
-        return null;
+        Kat ofisKat;
+        try {
+             ofisKat = katRepository.getInstanceWithNo(kat);
+        } catch (KatNotFoundExpection e) {
+            throw new RuntimeException(e);
+        }
+        Ofis newOfis = new Ofis(ofisKat,
+                metrekare,
+                kiraCarpani,
+                ZonedDateTime.now().plusMonths(1),
+                30);
+//        List<Ofis> ofisler = ofisKat.getOfisler();
+        List<Ofis> ofisler = new ArrayList<>();
+        ofisler.add(newOfis);
+        ofisKat.setOfisler(ofisler);
+//        katDao.merge(ofisKat);
+        ofisDao.persist(newOfis);
+        return ofisDao.getAll();
     }
 }

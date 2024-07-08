@@ -28,7 +28,7 @@ public class Ofis {
     @Column(name = "kira_carpani")
     private Double kiraCarpani;
 
-    @Column(scale = 10, precision = 2)
+    @Column(precision = 10 ,scale = 2 )
     private BigDecimal kira;
 
     @JsonSerialize(using = OdemeZamaniSerializer.class)
@@ -40,12 +40,18 @@ public class Ofis {
     @JsonBackReference
     private Kat kat;
 
-    public Ofis(int kat,Double metrekare, Double kiraCarpani, ZonedDateTime ilkOdeme, int payIntervalnDays) {
+    public Ofis(Kat kat,Double metrekare, Double kiraCarpani, ZonedDateTime ilkOdeme, int payIntervalnDays) {
         this.metrekare = metrekare;
         this.kiraCarpani = kiraCarpani;
         this.payIntervalnDays = payIntervalnDays;
         this.sonOdeme = ilkOdeme.plusDays(payIntervalnDays);
+        this.kat = kat;
+        this.kira = BigDecimal.valueOf(metrekare*kiraCarpani);
 
     }
+    public Ofis(){
+
+    }
+
 
 }
