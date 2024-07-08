@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class Kat {
+public class Kat { //plaza floor
     @Id
     private int katNo;
 

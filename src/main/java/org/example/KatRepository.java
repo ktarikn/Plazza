@@ -20,10 +20,10 @@ public class KatRepository implements Repository<Kat, Integer> {
     }
 
     public Kat getInstanceWithNo(int katNo) throws KatNotFoundExpection {
-        if (validateKat(katNo)){
+        if (validateKat(katNo)){ //makes sure either the floor exists or it is 1 floor away (no minecraft logic)
 
-            if(katNo<0 ) {
-                if (yerAltiKatlar[negativeKat(katNo)] == null) {
+            if(katNo<0 ) { //below ground
+                if (yerAltiKatlar[negativeKat(katNo)] == null) { //new floor
                     Kat kat = new Kat();
                     katDao.persist(kat);
                     kat.setKatNo(katNo);
@@ -32,8 +32,8 @@ public class KatRepository implements Repository<Kat, Integer> {
                 return (yerAltiKatlar[negativeKat(katNo)]);
             }
 
-            else{
-                if (katlar[katNo] == null) {
+            else{// above ground
+                if (katlar[katNo] == null) { //new floor
                     Kat kat = new Kat();
                     kat.setKatNo(katNo);
                     katDao.persist(kat);
