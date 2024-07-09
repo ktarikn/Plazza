@@ -1,0 +1,16 @@
+package org.example.security;
+
+import org.springframework.stereotype.Component;
+
+public class AuthenticationResponse {
+
+    private final String jwt;
+
+    public AuthenticationResponse(String jwt) {
+        this.jwt = jwt;
+    }
+
+    public String getJwt() {
+        return jwt;
+    }
+}
