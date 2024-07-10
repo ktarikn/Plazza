@@ -54,4 +54,7 @@ public class Ofis {
     }
 
 
+    public void reCalculate() {
+        this.kira = BigDecimal.valueOf(metrekare*kiraCarpani);
+    }
 }

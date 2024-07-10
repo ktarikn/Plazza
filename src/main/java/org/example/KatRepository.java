@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.Repository;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class KatRepository implements Repository<Kat, Integer> {
 
@@ -25,8 +27,9 @@ public class KatRepository implements Repository<Kat, Integer> {
             if(katNo<0 ) { //below ground
                 if (yerAltiKatlar[negativeKat(katNo)] == null) { //new floor
                     Kat kat = new Kat();
-                    katDao.persist(kat);
+
                     kat.setKatNo(katNo);
+                    katDao.persist(kat);
                     yerAltiKatlar[negativeKat(katNo)] = kat;
                 }
                 return (yerAltiKatlar[negativeKat(katNo)]);
@@ -37,6 +40,7 @@ public class KatRepository implements Repository<Kat, Integer> {
                     Kat kat = new Kat();
                     kat.setKatNo(katNo);
                     katDao.persist(kat);
+
                     katlar[katNo] = kat;
                 }
                 return katlar[katNo];
@@ -72,5 +76,18 @@ public class KatRepository implements Repository<Kat, Integer> {
     }
     private int negativeKat(int katNo){
         return -katNo-1;
+    }
+
+    void addOfis(Kat kat,Ofis ofis){
+        List<Ofis> ofisler;
+        if(kat.getOfisler() == null){
+            ofisler = new ArrayList<Ofis>();
+        }
+        else{
+            ofisler = kat.getOfisler();
+        }
+        ofisler.add(ofis);
+        kat.setOfisler(ofisler);
+        katDao.merge(kat);
     }
 }

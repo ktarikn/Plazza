@@ -24,4 +24,9 @@ public class KatDao {
     public Kat[] getAll() {
         return em.createQuery("from Kat", Kat.class).getResultList().toArray(new Kat[0]);
     }
+
+    @Transactional
+    public Kat getById(int id) {
+        return em.find(Kat.class, id);
+    }
 }
