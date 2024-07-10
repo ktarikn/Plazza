@@ -1,13 +1,10 @@
 package org.example;
 
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.val;
-import org.example.security.AuthenticationRequest;
+import org.example.securityold.AuthenticationRequest;
 //import org.example.security.AuthenticationResponse;
 //import org.example.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.domain.OffsetScrollPosition;
 //import org.springframework.http.ResponseEntity;
 //import org.springframework.security.authentication.AuthenticationManager;
 //import org.springframework.security.authentication.BadCredentialsException;
@@ -18,8 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 public class ResourceManager{

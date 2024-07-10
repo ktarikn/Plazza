@@ -1,6 +1,4 @@
-package org.example.security;
-
-import org.springframework.stereotype.Component;
+package org.example.securityold;
 
 public class AuthenticationResponse {
 
