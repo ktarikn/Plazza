@@ -19,7 +19,7 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-    private static final String JWT_SECRET = "secret"; //TODO do this properly
+    private static final String JWT_SECRET = "a0cebcba50759aead6db328c1e0987a51652f5abcf39728fce3bcad0c277ebf4"; //TODO do this properly
 
 
     public String generateToken(UserDetails userDetails) {
